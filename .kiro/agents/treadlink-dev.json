@@ -1,0 +1,8 @@
+{
+  "name": "treadlink-dev",
+  "description": "Treadlink embedded Rust development",
+  "resources": [
+    "skill://.kiro/skills/**/SKILL.md",
+    "file://.kiro/steering/**/*.md"
+  ]
+}
