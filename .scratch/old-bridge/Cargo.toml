@@ -1,0 +1,33 @@
+[package]
+name = "nrf-ftms-rsc-bridge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+embassy-executor = { version = "0.10.0", features = ["platform-cortex-m", "executor-thread"] }
+embassy-nrf = { version = "0.10.0", features = ["nrf52840", "gpiote", "time-driver-rtc1"], default-features = false }
+embassy-time = "0.5.1"
+embassy-futures = "0.1"
+embassy-sync = "0.7"
+nrf-sdc = { version = "0.4", features = ["nrf52840", "peripheral", "central", "defmt"] }
+nrf-mpsl = { version = "0.3", features = ["nrf52840", "critical-section-impl", "defmt"] }
+trouble-host = { version = "0.6", features = ["gatt", "peripheral", "central", "scan", "defmt", "derive", "connection-params-update", "default-packet-pool-mtu-64", "default-packet-pool-size-64"] }
+bt-hci = "0.8"
+protocol = { path = "../old-protocol", features = ["defmt"] }
+defmt = "0.3"
+defmt-rtt = "0.4"
+cortex-m = "0.7"
+cortex-m-rt = "0.7"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+static_cell = "2"
+
+[[bin]]
+name = "nrf-ftms-rsc-bridge"
+path = "src/main.rs"
+[workspace]
+
+
+[patch.crates-io]
+nrf-sdc = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+nrf-mpsl = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+bt-hci = { git = "https://github.com/embassy-rs/bt-hci.git", rev = "f6f359650e671d71c96b4354a6b5e26ea3918031" }

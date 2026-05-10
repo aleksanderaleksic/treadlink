@@ -91,6 +91,16 @@ UINT8 enum: 0=Other, 1=Top of shoe, 2=In shoe, 3=Hip, 4–16=cycling positions (
 - [ ] All multi-byte fields little-endian
 - [ ] Discard measurement if notification fails (time-sensitive data)
 
+## Lessons Learned
+
+1. **RSC Measurement characteristic needs `read` AND `notify` properties** — Some consumers (including Garmin) read the characteristic value during validation before subscribing to notifications.
+
+2. **RSC Feature (0x2A54) is mandatory** — Per spec, this characteristic must always be present. Omitting it causes some consumers to reject the service.
+
+3. **Cadence field is mandatory** — It must always be present in the notification payload (set to 0 if not available). Only stride length and total distance are optional.
+
+4. **Garmin foot pod speed source configuration** — After pairing, the user must configure Settings → Sensors → [sensor] → Speed → Indoor/Always, and start a Treadmill Run activity for pace to display.
+
 ## Advanced details
 
 See [REFERENCE.md](REFERENCE.md) for SC Control Point procedures, error handling, and timing requirements.
