@@ -40,6 +40,7 @@ pub enum ParseError {
 /// - If flags bit 0 set: next 2 bytes = stride length (u16 LE, 1/100 m)
 /// - If flags bit 1 set: next 4 bytes = total distance (u32 LE, 1/10 m)
 /// - Bit 2: walking/running status (informational, no extra bytes)
+#[allow(dead_code)] // Used by test crate (tests/pbt)
 pub fn parse_rsc_measurement(bytes: &[u8]) -> Result<RscMeasurement, ParseError> {
     // Minimum payload is 4 bytes: flags + speed(2) + cadence(1)
     const BASE_LEN: usize = 4;
@@ -109,6 +110,7 @@ pub fn parse_rsc_measurement(bytes: &[u8]) -> Result<RscMeasurement, ParseError>
 ///
 /// Output: [flags, speed_lo, speed_hi, cadence, stride_lo?, stride_hi?, dist_0?, dist_1?, dist_2?, dist_3?]
 /// Maximum 10 bytes.
+#[allow(dead_code)] // Used by test crate (tests/pbt)
 pub fn serialize_rsc_measurement(data: &RscMeasurement) -> heapless::Vec<u8, 10> {
     let mut buf = heapless::Vec::<u8, 10>::new();
 
@@ -233,6 +235,7 @@ pub fn parse_treadmill_data(bytes: &[u8]) -> Result<TreadmillData, ParseError> {
 /// - Bit 0 = 0 when speed is Some, bit 0 = 1 when speed is None
 /// - Bit 2 = 1 when total_distance is Some
 /// - Bit 1 is never set (we don't serialize average speed)
+#[allow(dead_code)] // Used by test crate (tests/pbt)
 pub fn serialize_treadmill_data(data: &TreadmillData) -> Vec<u8, 7> {
     let mut buf: Vec<u8, 7> = Vec::new();
 

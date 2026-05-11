@@ -34,7 +34,7 @@ pub fn assemble_rsc(data: &TreadmillData) -> RscMeasurement {
         speed,
         cadence: 0,
         stride_length: Some(100),
-        total_distance: data.total_distance.map(convert_distance),
+        total_distance,
     }
 }
 

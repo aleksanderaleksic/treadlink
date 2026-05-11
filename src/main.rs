@@ -6,7 +6,7 @@
 use defmt::*;
 use defmt_rtt as _;
 use embassy_executor::Spawner;
-use embassy_futures::select::{select, Either};
+use embassy_futures::select::select;
 use embassy_nrf::{bind_interrupts, rng};
 use embassy_time::{Duration, Timer, with_timeout};
 use nrf_sdc::mpsl::MultiprotocolServiceLayer;
@@ -207,9 +207,9 @@ async fn main(spawner: Spawner) {
     static STACK: StaticCell<Stack<'static, sdc::SoftdeviceController<'static>, DefaultPacketPool>> = StaticCell::new();
     let stack: &'static _ = STACK.init(trouble_host::new(sdc, resources).set_random_address(address).build());
 
-    let mut central = stack.central();
-    let mut peripheral = stack.peripheral();
-    let mut runner = stack.runner();
+    let central = stack.central();
+    let peripheral = stack.peripheral();
+    let runner = stack.runner();
 
     use embassy_nrf::gpio::{Level, Output, OutputDrive};
 
