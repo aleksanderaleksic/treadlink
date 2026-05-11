@@ -1,0 +1,17 @@
+[package]
+name = "protocol"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+std = []
+defmt = ["dep:defmt"]
+
+[dependencies]
+thiserror = { version = "2", default-features = false }
+libm = "0.2"
+defmt = { version = "0.3", optional = true }
+
+[dev-dependencies]
+proptest = "1"

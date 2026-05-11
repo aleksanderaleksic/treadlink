@@ -89,6 +89,12 @@ Results: 0x01=Success, 0x02=Unsupported, 0x03=Invalid, 0x04=Failed, 0x05=Not Per
 
 Bit 0=Treadmill, 1=Cross Trainer, 2=Step Climber, 3=Stair Climber, 4=Rower, 5=Indoor Bike.
 
+## Lessons Learned
+
+1. **FTMS treadmills use large MTU** — The Sole F63 treadmill negotiates MTU 672. Ensure the packet pool can handle fragmented packets at this size.
+
+2. **Treadmill connection parameters** — The treadmill requests connection interval of 20ms (16 units × 1.25ms). Use matching parameters in ConnectConfig to avoid disconnection.
+
 ## Advanced
 
 See [REFERENCE.md](REFERENCE.md) for Indoor Bike, Rower, Cross Trainer field layouts, full Feature bitfields, Status opcodes, Supported Range formats, and multi-notification rules.

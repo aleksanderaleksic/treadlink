@@ -1,0 +1,9 @@
+[package]
+name = "treadlink-pbt"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+heapless = "0.8"
+proptest = "1"

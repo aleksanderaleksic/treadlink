@@ -1,0 +1,36 @@
+[workspace]
+members = [
+    "crates/protocol",
+    "crates/app-core",
+    "crates/nrf-ftms-rsc-bridge",
+]
+
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+
+[profile.dev]
+opt-level = "s"    # optimize for size
+lto = true         # link-time optimization
+codegen-units = 1  # better optimization at cost of compile time
+
+[profile.release]
+opt-level = "s"    # optimize for size
+lto = true         # link-time optimization
+codegen-units = 1  # better optimization at cost of compile time
+
+
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny" # Often used alongside unwrap_used
+
+# The published nrf-sdc 0.3 depends on bt-hci 0.4, but trouble-host 0.6 needs
+# bt-hci 0.8. Use the same git revisions as the trouble examples to get
+# compatible versions of nrf-sdc/nrf-mpsl that work with bt-hci 0.8.
+[patch.crates-io]
+nrf-sdc = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+nrf-mpsl = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+bt-hci = { git = "https://github.com/embassy-rs/bt-hci.git", rev = "f6f359650e671d71c96b4354a6b5e26ea3918031" }
+

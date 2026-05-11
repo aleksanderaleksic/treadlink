@@ -1,0 +1,37 @@
+[workspace]
+members = [".", "tests/pbt"]
+
+[package]
+name = "treadlink"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+embassy-executor = { version = "0.10", features = ["defmt", "platform-cortex-m", "executor-thread"] }
+embassy-nrf = { version = "0.10", features = ["nrf52840", "time-driver-rtc1"] }
+embassy-time = "0.5"
+embassy-sync = "0.7"
+embassy-futures = "0.1"
+trouble-host = { git = "https://github.com/embassy-rs/trouble.git", rev = "48e409858586546272a405525b134f8c9ab29320", features = ["central", "peripheral", "gatt", "scan", "defmt", "derive", "connection-params-update"] }
+bt-hci = { version = "0.8", features = ["defmt"] }
+nrf-sdc = { version = "0.4", default-features = false, features = ["nrf52840", "peripheral", "central", "defmt"] }
+nrf-mpsl = { version = "0.3", default-features = false, features = ["defmt", "critical-section-impl"] }
+defmt = "1.0"
+defmt-rtt = "1.0"
+panic-probe = { version = "1.0", features = ["print-defmt"] }
+cortex-m = { version = "0.7", features = ["inline-asm"] }
+cortex-m-rt = "0.7"
+static_cell = "2"
+heapless = "0.9"
+
+[dev-dependencies]
+proptest = "1"
+
+[patch.crates-io]
+nrf-sdc = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+nrf-mpsl = { git = "https://github.com/alexmoon/nrf-sdc.git", rev = "812a56e3411bc3ff850d354401d95221e1f4fb84" }
+
+[profile.release]
+debug = 2
+lto = true
+opt-level = "s"
